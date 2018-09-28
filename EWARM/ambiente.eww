@@ -1,7 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
+
 <workspace>
   <project>
-    <path>$WS_DIR$\sc613_adv.ewp</path>
+    <path>$WS_DIR$\sc613.ewp</path>
   </project>
-  <batchBuild />
+  <batchBuild/>
 </workspace>
+
+
