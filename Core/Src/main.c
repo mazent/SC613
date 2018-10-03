@@ -5,6 +5,8 @@
 #include "stm32f0xx_hal.h"
 #include "usb_device.h"
 
+extern void app(void) ;
+
 ADC_HandleTypeDef hadc ;
 DMA_HandleTypeDef hdma_adc ;
 
@@ -257,11 +259,12 @@ static void MX_GPIO_Init(void)
   */
 void _Error_Handler(char *file, int line)
 {
-    /* USER CODE BEGIN Error_Handler_Debug */
-    /* User can add his own implementation to report the HAL error return state */
-    while (1) {
-    }
-    /* USER CODE END Error_Handler_Debug */
+#ifdef NDEBUG
+	NVIC_SystemReset() ;
+#else
+	DBG_PRINTF("ERROR_HANDLER: %s %" PRIu32 "\r\n", file, line) ;
+	__BKPT(0) ;
+#endif
 }
 
 #ifdef USE_FULL_ASSERT
@@ -301,15 +304,5 @@ int main(void)
     MX_TIM17_Init() ;
     MX_USB_DEVICE_Init() ;
 
-    {
-    	uint32_t w0 = HAL_GetUIDw0() ;
-    	uint32_t w1 = HAL_GetUIDw1() ;
-    	uint32_t w2 = HAL_GetUIDw2() ;
-
-    	DBG_PRINTF("scaldabagno %08X%08X%08X\n", w0, w1, w2) ;
-    }
-
-    while (true) {
-    	HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI) ;
-    }
+    app() ;
 }

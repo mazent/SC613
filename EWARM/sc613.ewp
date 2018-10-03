@@ -325,6 +325,7 @@
           <state>$PROJ_DIR$/../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc</state>
           <state>$PROJ_DIR$/../Drivers/CMSIS/Device/ST/STM32F0xx/Include</state>
           <state>$PROJ_DIR$/../Drivers/CMSIS/Include</state>
+          <state>$PROJ_DIR$/../soc</state>
           <state>$PROJ_DIR$/../cod</state>
         </option>
         <option>
@@ -1014,6 +1015,12 @@
     </group>
   </group>
   <group>
+    <name>cod</name>
+    <file>
+      <name>$PROJ_DIR$\..\cod\app.c</name>
+    </file>
+  </group>
+  <group>
     <name>Drivers</name>
     <group>
       <name>CMSIS</name>
@@ -1096,6 +1103,15 @@
         <name>$PROJ_DIR$\..\Middlewares\ST\STM32_USB_Device_Library\Core\Src\usbd_ioreq.c</name>
       </file>
     </group>
+  </group>
+  <group>
+    <name>soc</name>
+    <file>
+      <name>$PROJ_DIR$\..\soc\soc.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\soc\timer.c</name>
+    </file>
   </group>
 </project>
 
