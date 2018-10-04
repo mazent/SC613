@@ -8,6 +8,7 @@
 #define TIM_LEDR        0
 #define TIM_LEDV        1
 #define TIM_CICA        2
-#define MAX_TIMER_SW    3
+#define TIM_TEMP        3
+#define MAX_TIMER_SW    4
 
 #endif

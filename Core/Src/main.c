@@ -7,7 +7,6 @@
 
 extern void app(void) ;
 
-ADC_HandleTypeDef hadc ;
 DMA_HandleTypeDef hdma_adc ;
 
 /**
@@ -66,82 +65,6 @@ void SystemClock_Config(void)
 //    HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0) ;
 }
 
-/* ADC init function */
-static void MX_ADC_Init(void)
-{
-    ADC_ChannelConfTypeDef sConfig ;
-
-    /**Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conversion)
-    */
-    hadc.Instance = ADC1 ;
-    hadc.Init.ClockPrescaler = ADC_CLOCK_ASYNC_DIV1 ;
-    hadc.Init.Resolution = ADC_RESOLUTION_12B ;
-    hadc.Init.DataAlign = ADC_DATAALIGN_RIGHT ;
-    hadc.Init.ScanConvMode = ADC_SCAN_DIRECTION_FORWARD ;
-    hadc.Init.EOCSelection = ADC_EOC_SEQ_CONV ;
-    hadc.Init.LowPowerAutoWait = DISABLE ;
-    hadc.Init.LowPowerAutoPowerOff = DISABLE ;
-    hadc.Init.ContinuousConvMode = DISABLE ;
-    hadc.Init.DiscontinuousConvMode = DISABLE ;
-    hadc.Init.ExternalTrigConv = ADC_SOFTWARE_START ;
-    hadc.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE ;
-    hadc.Init.DMAContinuousRequests = DISABLE ;
-    hadc.Init.Overrun = ADC_OVR_DATA_PRESERVED ;
-    if (HAL_ADC_Init(&hadc) != HAL_OK) {
-        _Error_Handler(__FILE__, __LINE__) ;
-    }
-
-    /**Configure for the selected ADC regular channel to be converted.
-    */
-    sConfig.Channel = ADC_CHANNEL_0 ;
-    sConfig.Rank = ADC_RANK_CHANNEL_NUMBER ;
-    sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5 ;
-    if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK) {
-        _Error_Handler(__FILE__, __LINE__) ;
-    }
-
-    /**Configure for the selected ADC regular channel to be converted.
-    */
-    sConfig.Channel = ADC_CHANNEL_1 ;
-    if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK) {
-        _Error_Handler(__FILE__, __LINE__) ;
-    }
-
-    /**Configure for the selected ADC regular channel to be converted.
-    */
-    sConfig.Channel = ADC_CHANNEL_2 ;
-    if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK) {
-        _Error_Handler(__FILE__, __LINE__) ;
-    }
-
-    /**Configure for the selected ADC regular channel to be converted.
-    */
-    sConfig.Channel = ADC_CHANNEL_3 ;
-    if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK) {
-        _Error_Handler(__FILE__, __LINE__) ;
-    }
-
-    /**Configure for the selected ADC regular channel to be converted.
-    */
-    sConfig.Channel = ADC_CHANNEL_TEMPSENSOR ;
-    if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK) {
-        _Error_Handler(__FILE__, __LINE__) ;
-    }
-
-    /**Configure for the selected ADC regular channel to be converted.
-    */
-    sConfig.Channel = ADC_CHANNEL_VREFINT ;
-    if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK) {
-        _Error_Handler(__FILE__, __LINE__) ;
-    }
-
-    /**Configure for the selected ADC regular channel to be converted.
-    */
-    sConfig.Channel = ADC_CHANNEL_VBAT ;
-    if (HAL_ADC_ConfigChannel(&hadc, &sConfig) != HAL_OK) {
-        _Error_Handler(__FILE__, __LINE__) ;
-    }
-}
 
 
 /**
@@ -249,7 +172,6 @@ int main(void)
     /* Initialize all configured peripherals */
     MX_GPIO_Init() ;
     MX_DMA_Init() ;
-    MX_ADC_Init() ;
 
     MX_USB_DEVICE_Init() ;
 

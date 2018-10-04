@@ -1,4 +1,4 @@
-#define STAMPA_DBG
+//#define STAMPA_DBG
 #include "includimi.h"
 #include "soc.h"
 

@@ -1022,6 +1022,12 @@
     <file>
       <name>$PROJ_DIR$\..\cod\buzzer.c</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\..\cod\lm20.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\cod\temp.c</name>
+    </file>
   </group>
   <group>
     <name>Drivers</name>

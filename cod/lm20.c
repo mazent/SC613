@@ -1,7 +1,10 @@
+#include "includimi.h"
+#include "lm20.h"
+
 static const uint16_t ADC_MIN = 377 ;
 static const uint16_t ADC_MAX = 3083 ;
 
-static const int16 gradix100[] = {
+static const int16_t gradix100[] = {
 	12996,		// 377
 	12990,
 	12983,
@@ -2711,12 +2714,16 @@ static const int16 gradix100[] = {
 	-5498		// 3083
 } ;
 
-bool temperatura(uint16_t adc, int16_t * gx100)
+bool LM20_temp(uint16_t adc, int16_t * gx100)
 {
-	if (adc < ADC_MIN)
+	if (adc < ADC_MIN) {
+		*gx100 = LM20_MAX ;
 		return false ;
-	else if (adc > ADC_MAX)
+	}
+	else if (adc > ADC_MAX) {
+		*gx100 = LM20_MIN ;
 		return false ;
+	}
 	else {
 		adc -= ADC_MIN ;
 		*gx100 = gradix100[adc] ;
