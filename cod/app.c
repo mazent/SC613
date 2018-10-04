@@ -3,6 +3,7 @@
 #include "soc.h"
 #include "buzzer.h"
 #include "temp.h"
+#include "scalda.h"
 
 #define ROSSO_MILLI		500
 
@@ -71,19 +72,21 @@ void app(void)
     SOC_ini() ;
 
     timer_setcb(TIM_LEDR, led_rosso) ;
-    timer_start(TIM_LEDR, ROSSO_MILLI) ;
+    timer_start(TIM_LEDR, 1) ;
 
     timer_setcb(TIM_LEDV, led_verde) ;
-    timer_start(TIM_LEDV, VERDE_MILLI) ;
+    timer_start(TIM_LEDV, 1) ;
 
     CONTROLLA( BUZZER_Iniz() ) ;
     cica = false ;
 //    timer_setcb(TIM_CICA, cicalino) ;
 //    timer_start(TIM_CICA, 1) ;
 
+    CONTROLLA( SCALDA_ini() ) ;
+
     CONTROLLA(TEMP_iniz()) ;
     timer_setcb(TIM_TEMP, temperature) ;
-    timer_start(TIM_TEMP, TEMP_MILLI) ;
+    timer_start(TIM_TEMP, 1) ;
 
     while (true) {
     	SOC_run() ;

@@ -1026,6 +1026,9 @@
       <name>$PROJ_DIR$\..\cod\lm20.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\cod\scalda.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\cod\temp.c</name>
     </file>
   </group>

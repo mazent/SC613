@@ -18,11 +18,9 @@
 // Scheda
 // ==========================================
 
-#define PIN_ALT(a, b)		(((volatile GPIO_TypeDef *) a)->BSRR = b)
-#define PIN_BAS(a, b)		(((volatile GPIO_TypeDef *) a)->BSRR = (b << 16))
-#define PIN_VAL(a, b)		(((volatile GPIO_TypeDef *) a)->IDR & b)
-
-//#include "bsp.h"
+//#define PIN_ALT(a, b)		(((volatile GPIO_TypeDef *) a)->BSRR = b)
+//#define PIN_BAS(a, b)		(((volatile GPIO_TypeDef *) a)->BSRR = (b << 16))
+//#define PIN_VAL(a, b)		(((volatile GPIO_TypeDef *) a)->IDR & b)
 
 static inline void MZ_GPIO_DeInit(GPIO_TypeDef * GPIOx, uint32_t GPIO_Pin)
 {
