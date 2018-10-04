@@ -10,10 +10,6 @@ extern void app(void) ;
 ADC_HandleTypeDef hadc ;
 DMA_HandleTypeDef hdma_adc ;
 
-TIM_HandleTypeDef htim17 ;
-
-extern void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim) ;
-
 /**
   * @brief System Clock Configuration
   * @retval None
@@ -147,53 +143,6 @@ static void MX_ADC_Init(void)
     }
 }
 
-/* TIM17 init function */
-static void MX_TIM17_Init(void)
-{
-    TIM_OC_InitTypeDef sConfigOC ;
-    TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig ;
-
-    htim17.Instance = TIM17 ;
-    htim17.Init.Prescaler = 0 ;
-    htim17.Init.CounterMode = TIM_COUNTERMODE_UP ;
-    htim17.Init.Period = 0 ;
-    htim17.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1 ;
-    htim17.Init.RepetitionCounter = 0 ;
-    htim17.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE ;
-    if (HAL_TIM_Base_Init(&htim17) != HAL_OK) {
-        _Error_Handler(__FILE__, __LINE__) ;
-    }
-
-    if (HAL_TIM_PWM_Init(&htim17) != HAL_OK) {
-        _Error_Handler(__FILE__, __LINE__) ;
-    }
-
-    sConfigOC.OCMode = TIM_OCMODE_PWM1 ;
-    sConfigOC.Pulse = 0 ;
-    sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH ;
-    sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH ;
-    sConfigOC.OCFastMode = TIM_OCFAST_DISABLE ;
-    sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET ;
-    sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET ;
-    if (HAL_TIM_PWM_ConfigChannel(&htim17, &sConfigOC,
-                                  TIM_CHANNEL_1) != HAL_OK) {
-        _Error_Handler(__FILE__, __LINE__) ;
-    }
-
-    sBreakDeadTimeConfig.OffStateRunMode = TIM_OSSR_DISABLE ;
-    sBreakDeadTimeConfig.OffStateIDLEMode = TIM_OSSI_DISABLE ;
-    sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF ;
-    sBreakDeadTimeConfig.DeadTime = 0 ;
-    sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE ;
-    sBreakDeadTimeConfig.BreakPolarity = TIM_BREAKPOLARITY_HIGH ;
-    sBreakDeadTimeConfig.AutomaticOutput = TIM_AUTOMATICOUTPUT_DISABLE ;
-    if (HAL_TIMEx_ConfigBreakDeadTime(&htim17,
-                                      &sBreakDeadTimeConfig) != HAL_OK) {
-        _Error_Handler(__FILE__, __LINE__) ;
-    }
-
-    HAL_TIM_MspPostInit(&htim17) ;
-}
 
 /**
   * Enable DMA controller clock
@@ -301,7 +250,7 @@ int main(void)
     MX_GPIO_Init() ;
     MX_DMA_Init() ;
     MX_ADC_Init() ;
-    MX_TIM17_Init() ;
+
     MX_USB_DEVICE_Init() ;
 
     app() ;

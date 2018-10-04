@@ -7,6 +7,7 @@
 // lista dei timer
 #define TIM_LEDR        0
 #define TIM_LEDV        1
-#define MAX_TIMER_SW    2
+#define TIM_CICA        2
+#define MAX_TIMER_SW    3
 
 #endif

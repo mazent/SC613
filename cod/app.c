@@ -1,6 +1,7 @@
 #define STAMPA_DBG
 #include "includimi.h"
 #include "soc.h"
+#include "buzzer.h"
 
 #define ROSSO_MILLI		500
 
@@ -20,6 +21,24 @@ static void led_verde(void)
 	timer_start(TIM_LEDV, VERDE_MILLI) ;
 }
 
+#define CICA_A_MILLI		100
+#define CICA_S_MILLI		400
+
+static bool cica = false ;
+
+static void cicalino(void)
+{
+	if (cica) {
+		BUZZER_Freq(0) ;
+		timer_start(TIM_CICA, CICA_S_MILLI) ;
+	}
+	else {
+		BUZZER_Freq(4000) ;
+		timer_start(TIM_CICA, CICA_A_MILLI) ;
+	}
+	cica = !cica ;
+}
+
 void app(void)
 {
     {
@@ -37,6 +56,11 @@ void app(void)
 
     timer_setcb(TIM_LEDV, led_verde) ;
     timer_start(TIM_LEDV, VERDE_MILLI) ;
+
+    CONTROLLA( BUZZER_Iniz() ) ;
+    cica = false ;
+//    timer_setcb(TIM_CICA, cicalino) ;
+//    timer_start(TIM_CICA, 1) ;
 
     while (true) {
     	SOC_run() ;

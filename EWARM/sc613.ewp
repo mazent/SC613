@@ -1019,6 +1019,9 @@
     <file>
       <name>$PROJ_DIR$\..\cod\app.c</name>
     </file>
+    <file>
+      <name>$PROJ_DIR$\..\cod\buzzer.c</name>
+    </file>
   </group>
   <group>
     <name>Drivers</name>
