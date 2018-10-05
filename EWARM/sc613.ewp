@@ -1000,6 +1000,9 @@
           </file>
           <file>
             <name>$PROJ_DIR$\..\USB_DEVICE\App\usbd_cdc_if.c</name>
+            <excluded>
+              <configuration>debug</configuration>
+            </excluded>
           </file>
           <file>
             <name>$PROJ_DIR$\..\USB_DEVICE\App\usbd_desc.c</name>
@@ -1020,7 +1023,19 @@
       <name>$PROJ_DIR$\..\cod\app.c</name>
     </file>
     <file>
+      <name>$PROJ_DIR$\..\cod\base64.c</name>
+    </file>
+    <file>
       <name>$PROJ_DIR$\..\cod\buzzer.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\cod\circo.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\cod\comandi.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\cod\eccezione.c</name>
     </file>
     <file>
       <name>$PROJ_DIR$\..\cod\lm20.c</name>
@@ -1030,6 +1045,9 @@
     </file>
     <file>
       <name>$PROJ_DIR$\..\cod\temp.c</name>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\..\cod\ucdc.c</name>
     </file>
   </group>
   <group>

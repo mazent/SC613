@@ -21,8 +21,13 @@ void SOC_apc(int, PF_SOC_APC) ;
 
 void SOC_run(void) ;
 
-//RICH_CPU SOC_cpu(void) ;
-//
-//void SOC_min(RICH_CPU) ;
+typedef enum {
+	CPU_RUN,
+	CPU_SLEEP
+} RICH_CPU ;
+
+RICH_CPU SOC_cpu(void) ;
+
+void SOC_min(RICH_CPU) ;
 
 #endif

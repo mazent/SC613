@@ -4,6 +4,7 @@
 #include "buzzer.h"
 #include "temp.h"
 #include "scalda.h"
+#include "comandi.h"
 
 #define ROSSO_MILLI		500
 
@@ -88,9 +89,17 @@ void app(void)
     timer_setcb(TIM_TEMP, temperature) ;
     timer_start(TIM_TEMP, 1) ;
 
+    CONTROLLA( CMD_ini() ) ;
+
     while (true) {
     	SOC_run() ;
 
-    	HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI) ;
+    	switch ( SOC_cpu() ) {
+    	case CPU_RUN:
+    		break ;
+    	case CPU_SLEEP:
+    		HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI) ;
+    		break ;
+    	}
     }
 }
