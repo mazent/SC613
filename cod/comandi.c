@@ -32,7 +32,7 @@ static uint8_t checksum(uint8_t * vett, uint16_t dim)
 	for (uint16_t i=0 ; i<dim ; i++)
 		cs += vett[i] ;
 
-	return ~cs ;
+	return cs ;
 }
 
 
@@ -48,7 +48,7 @@ static void risposta(uint16_t cmd, void * dati, uint16_t dim)
 		dimtx += dim ;
 	}
 
-	codif[dimtx] = checksum(codif, dimtx) ;
+	codif[dimtx] = ~checksum(codif, dimtx) ;
     ++dimtx ;
 
 	dimtx = b64_encode(codif, dimtx, tx + 1) ;
@@ -95,6 +95,8 @@ static void cmd_exe(void)
 {
 	uint16_t cmd ;
 	uint8_t * dati = decod + 2 ;
+
+	dimDec -= 2 ;
 
 	memcpy(&cmd, decod, 2) ;
 	switch (cmd) {

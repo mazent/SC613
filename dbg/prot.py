@@ -121,7 +121,6 @@ class PROT(object):
 
     def _ricevi(self):
         pkt = bytearray()
-        cs = 0
         trovato = False
         # Mi aspetto almeno: inizio + comando[2] + cs + fine
         daLeggere = 5
@@ -132,15 +131,10 @@ class PROT(object):
             for rx in letti:
                 if PROT._INIZIO_TRAMA == rx:
                     pkt = bytearray()
-                    cs = 0
                 elif PROT._FINE_TRAMA == rx:
                     if len(pkt) >= 3:
-                        if PROT._CS_VALIDO == cs & 0xFF:
-                            trovato = True
-                            # Tolgo il checksum
-                            del pkt[-1]
+                        trovato = True
                 else:
-                    cs += rx
                     pkt.append(rx)
             daLeggere = self.uart.inWaiting()
             if 0 == daLeggere:
@@ -151,7 +145,13 @@ class PROT(object):
         else:
             try:
                 x = base64.standard_b64decode(pkt)
-                pkt = bytearray(x)
+                cs = 0
+                for i in x:
+                    cs += i
+                if (cs & 0xFF) != PROT._CS_VALIDO:
+                    pkt = bytearray()
+                else:
+                    pkt = bytearray(x[:len(x)-1])
             except binascii.Error:
                 pkt = bytearray()
 
@@ -239,7 +239,7 @@ class PROT(object):
                 pass
             elif tmp[0] != tx[0]:
                 pass
-            elif tmp[1] != tx[1] | 0x80:
+            elif tmp[1] != tx[1] | 0xC0:
                 pass
             elif dim is None:
                 rsp = tmp[2:]
